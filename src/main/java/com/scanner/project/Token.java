@@ -1,4 +1,5 @@
 package com.scanner.project;
+
 public class Token {
 
 	// Token type
@@ -7,6 +8,14 @@ public class Token {
 	private String type;
 	// Token value
 	private String value;
+
+	/**
+	 * Constructor
+	 */
+	public Token(String type, String value) {
+		this.type = type;
+		this.value = value;
+	}
 
 	/**
 	 * @param value

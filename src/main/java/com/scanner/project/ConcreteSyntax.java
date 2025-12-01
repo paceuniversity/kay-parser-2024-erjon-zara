@@ -149,6 +149,12 @@ public class ConcreteSyntax {
 	        v.id = token.getValue();
 	        a.target = v;
 	        token = input.nextToken(); // consume Identifier
+
+	        // Check for common error: using = instead of :=
+	        if (token.getValue().equals("=")) {
+	        	throw new RuntimeException(SyntaxError(":="));
+	        }
+
 	        match(":=");
 	        a.source = expression();
 	        match(";");
@@ -265,7 +271,7 @@ public class ConcreteSyntax {
 		} else if (token.getType().equals("Literal")) {
 			Value v = null;
 			if (isInteger(token.getValue()))
-				v = new Value((new Integer(token.getValue())).intValue());
+				v = new Value(Integer.parseInt(token.getValue())); // FIXED: deprecated constructor
 			else if (token.getValue().equals("True"))
 				v = new Value(true);
 			else if (token.getValue().equals("False"))
